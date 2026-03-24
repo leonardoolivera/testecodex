@@ -1,0 +1,57 @@
+name: DOU Scraper - Execução Automática
+
+# Agendar execução diária às 6 da manhã (horário UTC)
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  # Permite dispara manualmente
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Instalar dependências
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      - name: Restaurar credenciais
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+        run: |
+          mkdir -p credentials
+          echo "$GOOGLE_CREDENTIALS" > credentials/credentials.json
+      
+      - name: Executar scraper
+        env:
+          SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
+        run: python main.py
+      
+      - name: Fazer upload de logs
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: scraper-logs
+          path: scraper.log
+          retention-days: 7
+
+# CONFIGURAÇÃO NECESSÁRIA:
+# 
+# 1. Vá para Settings > Secrets and variables > Actions
+# 2. Crie dois secrets:
+#    - GOOGLE_CREDENTIALS: Conteúdo completo do arquivo credentials.json
+#    - SPREADSHEET_ID: O ID da sua planilha
+#
+# Para obter as credenciais em formato texto:
+# cat credentials/credentials.json | base64
+#
+# Depois copie e cole no secret GOOGLE_CREDENTIALS
