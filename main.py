@@ -112,7 +112,7 @@ def export_weekly_markdown(resultados: list, start: date, end: date) -> str:
 # Índice
 # ---------------------------------------------------------------------------
 
-def update_index():
+def update_index(ultimos_resultados: list = None, ultimo_periodo: str = ''):
     os.makedirs(RESULTADOS_DIR, exist_ok=True)
 
     diarios = sorted(
@@ -128,26 +128,59 @@ def update_index():
             reverse=True
         )
 
+    agora = datetime.now().strftime('%d/%m/%Y às %H:%M')
+    total = len(ultimos_resultados) if ultimos_resultados else 0
+
     linhas = [
-        "# Resultados — DOU IFMS",
+        "# DOU — IFMS | Publicações Monitoradas",
         "",
-        "Publicações do Diário Oficial da União relacionadas ao IFMS, coletadas automaticamente.",
+        f"Atualizado em {agora} UTC  ",
+        f"Coleta automática do Diário Oficial da União — Segunda a Sexta",
+        "",
+        "---",
         "",
     ]
 
+    # Mostra publicações recentes diretamente no README
+    if ultimos_resultados:
+        linhas += [
+            f"## Publicações recentes — {ultimo_periodo}",
+            f"**{total} publicação(ões) encontrada(s)**",
+            "",
+        ]
+        for i, item in enumerate(ultimos_resultados, 1):
+            linhas += _format_item(i, item)
+    else:
+        linhas += [
+            f"## Publicações recentes — {ultimo_periodo}",
+            "_Nenhuma publicação encontrada no período._",
+            "",
+            "---",
+            "",
+        ]
+
+    # Histórico
+    if semanais or diarios:
+        linhas += ["## Histórico", ""]
+
     if semanais:
-        linhas += ["## Relatórios Semanais", "", "| Semana | Arquivo |", "|--------|---------|"]
+        linhas += ["**Relatórios Semanais**", ""]
         for f in semanais:
             partes = f.replace('.md', '').split('_')
-            label = f"{partes[0]} → {partes[1]}" if len(partes) == 2 else f
-            linhas.append(f"| {label} | [Ver relatório](semanas/{f}) |")
+            if len(partes) == 2:
+                d1 = _fmt_date(partes[0])
+                d2 = _fmt_date(partes[1])
+                label = f"{d1} → {d2}"
+            else:
+                label = f
+            linhas.append(f"- [{label}](semanas/{f})")
         linhas.append("")
 
     if diarios:
-        linhas += ["## Resultados Diários", "", "| Data | Arquivo |", "|------|---------|"]
+        linhas += ["**Dias anteriores**", ""]
         for f in diarios:
-            data = f.replace('.md', '')
-            linhas.append(f"| {data} | [Ver resultados]({f}) |")
+            d = _fmt_date(f.replace('.md', ''))
+            linhas.append(f"- [{d}]({f})")
 
     _write(os.path.join(RESULTADOS_DIR, 'README.md'), linhas)
     logger.info("Índice atualizado")
@@ -157,21 +190,43 @@ def update_index():
 # Helpers
 # ---------------------------------------------------------------------------
 
+def _fmt_date(value: str) -> str:
+    """Converte qualquer formato de data para DD/MM/YYYY."""
+    from src.dou_scraper import _parse_date
+    d = _parse_date(value)
+    return d.strftime('%d/%m/%Y') if d else (value or '—')
+
+
+def _fmt_secao(value: str) -> str:
+    """Normaliza seção: DO1/do1 → Seção 1."""
+    mapping = {'DO1': 'Seção 1', 'DO2': 'Seção 2', 'DO3': 'Seção 3',
+               'do1': 'Seção 1', 'do2': 'Seção 2', 'do3': 'Seção 3'}
+    return mapping.get(value, value or '—')
+
+
 def _format_item(i: int, item: dict) -> list:
+    titulo = item.get('titulo', 'Sem título')
+    orgao  = item.get('orgao', '—') or '—'
+    data   = _fmt_date(item.get('data_publicacao', ''))
+    secao  = _fmt_secao(item.get('secao', ''))
+    pagina = item.get('pagina', '') or ''
+    url    = item.get('url', '')
+    resumo = item.get('resumo', '') or ''
+
+    meta = f"**Data:** {data} | **{secao}**"
+    if pagina:
+        meta += f" | **Página:** {pagina}"
+
     linhas = [
-        f"### {i}. {item.get('titulo', 'Sem título')}",
+        f"### {i}. {titulo}",
         f"",
-        f"| Campo | Valor |",
-        f"|-------|-------|",
-        f"| **Data de publicação** | {item.get('data_publicacao', '—')} |",
-        f"| **Seção** | {item.get('secao', '—')} |",
-        f"| **Página** | {item.get('pagina', '—')} |",
-        f"| **Órgão** | {item.get('orgao', '—')} |",
+        f"**Órgão:** {orgao}  ",
+        meta + "  ",
     ]
-    if item.get('url'):
-        linhas.append(f"| **Link** | [Ver no DOU]({item['url']}) |")
-    if item.get('resumo'):
-        linhas += ["", f"> {item['resumo']}"]
+    if url:
+        linhas.append(f"**Link:** [Ver publicação completa no DOU]({url})")
+    if resumo:
+        linhas += ["", f"> {resumo}"]
     linhas += ["", "---", ""]
     return linhas
 
@@ -200,7 +255,7 @@ def run_daily():
     hoje = date.today()
     resultados = _run_scraper(start_date=hoje, end_date=hoje)
     filepath = export_daily_markdown(resultados, hoje)
-    update_index()
+    update_index(resultados, hoje.strftime('%d/%m/%Y'))
     logger.info(f"Concluído: {filepath} | {len(resultados)} resultado(s)")
     return True
 
@@ -214,29 +269,30 @@ def run_weekly():
     return run_range(segunda, sexta, weekly_report=True)
 
 
+
 def run_range(start: date, end: date, weekly_report: bool = True):
     logger.info(f"=== MODO: BACKFILL | {start} → {end} ===")
     resultados = _run_scraper(start_date=start, end_date=end)
+
+    from src.dou_scraper import _parse_date
 
     # Gera arquivos diários para cada dia do intervalo
     current = start
     while current <= end:
         dia_resultados = [
             r for r in resultados
-            if r.get('data_publicacao', '')[:10] in (
-                current.strftime('%d/%m/%Y'),
-                current.isoformat()
-            )
+            if _parse_date(r.get('data_publicacao', '')) == current
         ]
         export_daily_markdown(dia_resultados, current)
         current += timedelta(days=1)
 
     # Gera relatório semanal
+    periodo = f"{start.strftime('%d/%m')} a {end.strftime('%d/%m/%Y')}"
     if weekly_report:
         filepath = export_weekly_markdown(resultados, start, end)
         logger.info(f"Relatório semanal: {filepath}")
 
-    update_index()
+    update_index(resultados, periodo)
     logger.info(f"Concluído: {len(resultados)} resultado(s) no período")
     return True
 
