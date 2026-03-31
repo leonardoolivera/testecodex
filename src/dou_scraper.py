@@ -164,13 +164,17 @@ class DOUScraper:
     def filter_by_date_range(self, start_date: date, end_date: date) -> List[Dict]:
         """
         Filtra resultados dentro de um intervalo de datas (fallback cliente).
-        Suporta formatos DD/MM/YYYY e YYYY-MM-DD.
+        Se a data não puder ser parseada, o item é mantido por segurança.
         """
         filtered = []
         for r in self.results:
             pub = r.get('data_publicacao', '')
             parsed = _parse_date(pub)
-            if parsed and start_date <= parsed <= end_date:
+            if parsed is None:
+                # Data não parseável — mantém para não perder publicações
+                logger.debug(f"Data não parseável '{pub}' — mantendo resultado: {r.get('titulo','')[:60]}")
+                filtered.append(r)
+            elif start_date <= parsed <= end_date:
                 filtered.append(r)
 
         logger.info(f"Após filtro de data ({start_date} → {end_date}): {len(filtered)}")
@@ -187,10 +191,14 @@ class DOUScraper:
 
 
 def _parse_date(value: str) -> Optional[date]:
-    """Tenta converter string de data para objeto date."""
-    for fmt in ('%d/%m/%Y', '%Y-%m-%d', '%d-%m-%Y'):
+    """Tenta converter string de data para objeto date. Suporta vários formatos."""
+    if not value:
+        return None
+    # Normaliza: remove hora se vier junto (ex: "2026-03-26T00:00:00")
+    value = str(value).strip()[:10]
+    for fmt in ('%d/%m/%Y', '%Y-%m-%d', '%d-%m-%Y', '%Y/%m/%d'):
         try:
-            return datetime.strptime(value[:10], fmt).date()
+            return datetime.strptime(value, fmt).date()
         except (ValueError, TypeError):
             continue
     return None

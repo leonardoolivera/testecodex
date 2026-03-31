@@ -8,9 +8,9 @@ DOU_API_URL = "https://www.in.gov.br/api/asearch"
 
 # Palavras-chave para busca
 SEARCH_KEYWORDS = [
-    "Instituto Federal de Mato Grosso do Sul",
     "IFMS",
-    "Federal Mato Grosso do Sul"
+    "Instituto Federal de Educação, Ciência e Tecnologia de Mato Grosso do Sul",
+    "Instituto Federal de Mato Grosso do Sul",
 ]
 
 # Configurações de Google Sheets
