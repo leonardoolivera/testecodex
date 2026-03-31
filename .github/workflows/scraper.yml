@@ -1,16 +1,33 @@
-name: DOU Scraper - Execução Automática
+name: DOU Scraper - IFMS
 
 on:
   schedule:
-    - cron: '0 9 * * *'  # Todo dia às 06:00 horário de Brasília (09:00 UTC)
-  workflow_dispatch:       # Permite disparar manualmente
+    - cron: '0 9 * * 1-5'   # Diário, segunda a sexta às 06:00 Brasília (09:00 UTC)
+    - cron: '0 10 * * 1'    # Relatório semanal toda segunda-feira (semana anterior)
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Modo de execução'
+        required: true
+        default: 'daily'
+        type: choice
+        options:
+          - daily
+          - weekly
+          - backfill
+      start_date:
+        description: 'Data inicial (YYYY-MM-DD) — somente para backfill'
+        required: false
+      end_date:
+        description: 'Data final (YYYY-MM-DD) — somente para backfill'
+        required: false
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write  # Necessário para fazer commit no repositório
+      contents: write
 
     steps:
       - uses: actions/checkout@v4
@@ -25,18 +42,34 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Executar scraper
-        run: python main.py
+      - name: Executar scraper (agendado diário)
+        if: github.event_name == 'schedule' && github.event.schedule == '0 9 * * 1-5'
+        run: python main.py --mode daily
 
-      - name: Commitar resultados no repositório
+      - name: Executar scraper (agendado semanal)
+        if: github.event_name == 'schedule' && github.event.schedule == '0 10 * * 1'
+        run: python main.py --mode weekly
+
+      - name: Executar scraper (manual)
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          if [ "${{ github.event.inputs.mode }}" = "backfill" ]; then
+            python main.py --mode backfill \
+              --start "${{ github.event.inputs.start_date }}" \
+              --end "${{ github.event.inputs.end_date }}"
+          else
+            python main.py --mode ${{ github.event.inputs.mode }}
+          fi
+
+      - name: Commitar resultados
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add resultados/
-          git diff --cached --quiet || git commit -m "chore: atualiza resultados DOU $(date +'%Y-%m-%d')"
+          git diff --cached --quiet || git commit -m "chore: resultados DOU $(date +'%Y-%m-%d')"
           git push
 
-      - name: Fazer upload do log
+      - name: Upload do log
         if: always()
         uses: actions/upload-artifact@v4
         with:
