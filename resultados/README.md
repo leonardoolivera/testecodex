@@ -1,19 +1,223 @@
-# Resultados — DOU IFMS
+# DOU — IFMS | Publicações Monitoradas
 
-Publicações do Diário Oficial da União relacionadas ao IFMS, coletadas automaticamente.
+Atualizado em 31/03/2026 às 19:25 UTC  
+Coleta automática do Diário Oficial da União — Segunda a Sexta
 
-## Relatórios Semanais
+---
 
-| Semana | Arquivo |
-|--------|---------|
-| 2026-03-23 → 2026-03-27 | [Ver relatório](semanas/2026-03-23_2026-03-27.md) |
+## Publicações recentes — 23/03 a 27/03/2026
+**20 publicação(ões) encontrada(s)**
 
-## Resultados Diários
+### 1. PORTARIAS DE 19 DE MARÇO DE 2026
 
-| Data | Arquivo |
-|------|---------|
-| 2026-03-27 | [Ver resultados](2026-03-27.md) |
-| 2026-03-26 | [Ver resultados](2026-03-26.md) |
-| 2026-03-25 | [Ver resultados](2026-03-25.md) |
-| 2026-03-24 | [Ver resultados](2026-03-24.md) |
-| 2026-03-23 | [Ver resultados](2026-03-23.md) |
+**Órgão:** Ministério da Educação/Instituto Federal de Educação, Ciência e Tecnologia de Mato Grosso do Sul  
+**Data:** 23/03/2026 | **Seção 2** | **Página:** 19  
+**Link:** [Ver publicação completa no DOU](https://www.in.gov.br/en/web/dou/-/portarias-de-19-de-marco-de-2026-694529315)
+
+> PORTARIAS DE 19 DE MARÇO DE 2026 A REITORA DO INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DE MATO GROSSO DO SUL (IFMS), no uso de suas atribuições legais, considerando o Decreto de 5 de dezembro de 2023, publicado no Diário Oficial da União de 6 de dezembro de 2023, seção 2, pág. 01, resolve
+
+---
+
+### 2. Extrato de Acordo de Cooperação Técnica
+
+**Órgão:** Ministério da Educação/Instituto Federal de Educação, Ciência e Tecnologia de Mato Grosso do Sul  
+**Data:** 23/03/2026 | **Seção 3** | **Página:** 69  
+**Link:** [Ver publicação completa no DOU](https://www.in.gov.br/en/web/dou/-/extrato-de-acordo-de-cooperacao-tecnica-694743168)
+
+> Extrato de Acordo de Cooperação Técnica Termo de Cooperação Técnica nº 006/2026. Processo 23347.001447.2026-28. Concedente: INSTITUTO SANGUE BOM. CNPJ: 26.517.415/0001-20. Convenente: INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DE MATO GROSSO DO SUL. Objeto: para execução da(s) atividade(s),
+
+---
+
+### 3. EDITAL CAMPUS NAVIRAÍ/IFMS Nº 2/2026
+
+**Órgão:** Ministério da Educação/Instituto Federal de Educação, Ciência e Tecnologia de Mato Grosso do Sul/Campus Naviraí  
+**Data:** 23/03/2026 | **Seção 3** | **Página:** 69  
+**Link:** [Ver publicação completa no DOU](https://www.in.gov.br/en/web/dou/-/edital-campus-navirai/ifms-n-2/2026-694770522)
+
+> EDITAL CAMPUS NAVIRAÍ/IFMS Nº 2/2026 PROCESSO SELETIVO SIMPLIFICADO PARA PROFESSOR SUBSTITUTO O DIRETOR-GERAL DO CAMPUS NAVIRAÍ DO INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DE MATO GROSSO DO SUL (IFMS), no uso das atribuições legais que lhe confere o inciso XIV, art. 12 do Regimento Geral,
+
+---
+
+### 4. EXTRATO DE CONTRATO Nº 18/2026 - UASG 155849
+
+**Órgão:** Ministério da Educação/Instituto Federal de Educação, Ciência e Tecnologia de Mato Grosso do Sul/Campus Naviraí  
+**Data:** 23/03/2026 | **Seção 3** | **Página:** 69  
+**Link:** [Ver publicação completa no DOU](https://www.in.gov.br/en/web/dou/-/extrato-de-contrato-n-18/2026-uasg-155849-694557872)
+
+> EXTRATO DE CONTRATO Nº 18/2026 - UASG 155849 Nº Processo: 23347.006857/2025-84. Dispensa Nº 271/2025. Contratante: INST.FED.DO MS/CAMPUS NAVIRAI. Contratado: 01.629.147/0001-08 - CALIZA - COMERCIO DE GAS LTDA. Objeto: Aquisição de recargas de gás glp p45 e p13 e componentes para sistema de gás para
+
+---
+
+### 5. AVISO DE REABERTURA DE PRAZO
+
+**Órgão:** Ministério da Educação/Instituto Federal de Educação, Ciência e Tecnologia de Mato Grosso do Sul  
+**Data:** 23/03/2026 | **Seção 3** | **Página:** 69  
+**Link:** [Ver publicação completa no DOU](https://www.in.gov.br/en/web/dou/-/aviso-de-reabertura-de-prazo-694575526)
+
+> AVISO DE REABERTURA DE PRAZO CONCORRÊNCIA Nº 90043/2026 Comunicamos a reabertura de prazo da licitação supracitada, processo Nº 23347012428202546. , publicada no D.O.U de 21/01/2026 . Objeto: Contratação de empresa especializada para execução da obra de construção do Campus Paranaíba do Instituto Fe
+
+---
+
+### 6. EXTRATO DE TERMO ADITIVO Nº 1/2026 - UASG 158448
+
+**Órgão:** Ministério da Educação/Instituto Federal de Educação, Ciência e Tecnologia de Mato Grosso do Sul/Campus Aquidauana  
+**Data:** 24/03/2026 | **Seção 3** | **Página:** 34  
+**Link:** [Ver publicação completa no DOU](https://www.in.gov.br/en/web/dou/-/extrato-de-termo-aditivo-n-1/2026-uasg-158448-694887473)
+
+> EXTRATO DE TERMO ADITIVO Nº 1/2026 - UASG 158448 Número do Contrato: 30/2025. Nº Processo: 23347.000140.2025-29 Pregão nº 90241/2024 Contratante: INST.FED.DO MS/CAMPUS AQUIDAUANA. Contratado: 56.136.834/0001-83 - CAB Indústria de Confecções LTDA . Objeto: Prorrogar o prazo de vigência do contrato po
+
+---
+
+### 7. EXTRATO DE TERMO ADITIVO Nº 3/2026 - UASG 158132
+
+**Órgão:** Ministério da Educação/Instituto Federal de Educação, Ciência e Tecnologia de Mato Grosso do Sul  
+**Data:** 24/03/2026 | **Seção 3** | **Página:** 34  
+**Link:** [Ver publicação completa no DOU](https://www.in.gov.br/en/web/dou/-/extrato-de-termo-aditivo-n-3/2026-uasg-158132-694918249)
+
+> EXTRATO DE TERMO ADITIVO Nº 3/2026 - UASG 158132 Número do Contrato: 57/2023. Nº Processo: 23347.010185/2023-40. Concorrência. Nº 5/2022. Contratante: INST.FED.DE EDUC.,CIENC.E TEC.DO MAT.G.DO SUL. Contratado: 08.593.703/0001-82 - PAS - PROJETOS, ASSESSORIA E SISTEMAS LTDA. Objeto: Prorrogar o prazo
+
+---
+
+### 8. EXTRATOs DE TERMOs ADITIVOs
+
+**Órgão:** Ministério da Educação/Instituto Federal de Educação, Ciência e Tecnologia de Mato Grosso do Sul  
+**Data:** 24/03/2026 | **Seção 3** | **Página:** 34  
+**Link:** [Ver publicação completa no DOU](https://www.in.gov.br/en/web/dou/-/extratos-de-termos-aditivos-694931540)
+
+> EXTRATOs DE TERMOs ADITIVOs ESPÉCIE: Quarto Termo Aditivo ao Contrato Administrativo de Prestação de Serviços Nº 036/2024 - DIPES/IFMS. Contratante: Instituto Federal de Educação, Ciência e Tecnologia de Mato Grosso do Sul (IFMS). Contratado: LEONARDO PESCINELLI MARTINS: modificação da cláusula sext
+
+---
+
+### 9. EDITAL CAMPUS NAVIRAÍ/IFMS Nº 2/2026
+
+**Órgão:** Ministério da Educação/Instituto Federal de Educação, Ciência e Tecnologia de Mato Grosso do Sul/Campus Naviraí  
+**Data:** 24/03/2026 | **Seção 3** | **Página:** 34  
+**Link:** [Ver publicação completa no DOU](https://www.in.gov.br/en/web/dou/-/edital-campus-navirai/ifms-n-2/2026-694869066)
+
+> EDITAL CAMPUS NAVIRAÍ/IFMS Nº 2/2026 PROCESSO SELETIVO SIMPLIFICADO PARA PROFESSOR SUBSTITUTO O DIRETOR-GERAL DO CAMPUS NAVIRAÍ DO INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DE MATO GROSSO DO SUL (IFMS), no uso das atribuições legais que lhe confere o inciso XIV, art. 12 do Regimento Geral,
+
+---
+
+### 10. PORTARIAS DE 24 DE MARÇO DE 2026
+
+**Órgão:** Ministério da Educação/Instituto Federal de Educação, Ciência e Tecnologia de Mato Grosso do Sul  
+**Data:** 25/03/2026 | **Seção 2** | **Página:** 21  
+**Link:** [Ver publicação completa no DOU](https://www.in.gov.br/en/web/dou/-/portarias-de-24-de-marco-de-2026-695116609)
+
+> PORTARIAS DE 24 DE MARÇO DE 2026 A REITORA DO INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DE MATO GROSSO DO SUL (IFMS), no uso de suas atribuições legais, considerando o Decreto de 5 de dezembro de 2023, publicado no Diário Oficial da União de 6 de dezembro de 2023, seção 2, pág. 01; resolve
+
+---
+
+### 11. PORTARIA Nº 308, DE 23 DE MARÇO DE 2026
+
+**Órgão:** Ministério da Educação/Instituto Federal de Educação, Ciência e Tecnologia de Mato Grosso do Sul  
+**Data:** 25/03/2026 | **Seção 2** | **Página:** 21  
+**Link:** [Ver publicação completa no DOU](https://www.in.gov.br/en/web/dou/-/portaria-n-308-de-23-de-marco-de-2026-695101830)
+
+> PORTARIA Nº 308, DE 23 DE MARÇO DE 2026 A REITORA DO INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DE MATO GROSSO DO SUL (IFMS), no uso de suas atribuições legais, considerando o Decreto de 05 de dezembro de 2023, publicado no Diário Oficial da União de 06 de dezembro de 2023, seção 2, pág. 01
+
+---
+
+### 12. EXTRATO DE APOSTILAMENTO Nº 1/2026 - UASG 158132
+
+**Órgão:** Ministério da Educação/Instituto Federal de Educação, Ciência e Tecnologia de Mato Grosso do Sul  
+**Data:** 25/03/2026 | **Seção 3** | **Página:** 54  
+**Link:** [Ver publicação completa no DOU](https://www.in.gov.br/en/web/dou/-/extrato-de-apostilamento-n-1/2026-uasg-158132-695240249)
+
+> EXTRATO DE APOSTILAMENTO Nº 1/2026 - UASG 158132 Número do Contrato: 102/2025. Nº Processo: 23347.005682/2024-15. Contratante: INST.FED.DE EDUC.,CIENC.E TEC.DO MAT.G.DO SUL. Contratado: 47.297.949/0001-69 - M E ENGENHARIA LTDA. Objeto: Concessão da reajuste sobre o valor da contratação de empresa pa
+
+---
+
+### 13. EXTRATO DE TERMO DE CESSÃO DE USO GRATUITO Nº 6/2026
+
+**Órgão:** Entidades de Fiscalização do Exercício das Profissões Liberais/Conselho Regional de Engenharia e Agronomia do Mato Grosso do Sul  
+**Data:** 25/03/2026 | **Seção 3** | **Página:** 315  
+**Link:** [Ver publicação completa no DOU](https://www.in.gov.br/en/web/dou/-/extrato-de-termo-de-cessao-de-uso-gratuito-n-6/2026-695268632)
+
+> EXTRATO DE TERMO DE CESSÃO DE USO GRATUITO Nº 6/2026 PROCESSO: P2026/006379-2. PARTES: Conselho Regional de Engenharia e Agronomia de Mato Grosso do Sul - Crea-MS e o IFMS - INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DE MATO GROSSO DO SUL, de uso do Auditório do Crea-MS Arq. Arnaldino da Si
+
+---
+
+### 14. AVISO DE PENALIDADE
+
+**Órgão:** Ministério da Educação/Instituto Federal de Educação, Ciência e Tecnologia de Mato Grosso do Sul/Pró-Reitoria de Administração  
+**Data:** 26/03/2026 | **Seção 3** | **Página:** 43  
+**Link:** [Ver publicação completa no DOU](https://www.in.gov.br/en/web/dou/-/aviso-de-penalidade-695725962)
+
+> AVISO DE PENALIDADE A Reitoria do Instituto Federal de Educação, Ciência e Tecnologia de Mato Grosso do Sul - IFMS, CNPJ 10.673.078/0001-20, informa o representante da empresa Angico Construtora e Prestadora de Serviços Ltda, CNPJ 29.366.464/0001-06, acerca da aplicação de penalidade em virtude do d
+
+---
+
+### 15. PORTARIAS DE 26 DE MARÇO DE 2026
+
+**Órgão:** Ministério da Educação/Instituto Federal de Educação, Ciência e Tecnologia de Mato Grosso do Sul  
+**Data:** 27/03/2026 | **Seção 2** | **Página:** 19  
+**Link:** [Ver publicação completa no DOU](https://www.in.gov.br/en/web/dou/-/portarias-de-26-de-marco-de-2026-695768949)
+
+> PORTARIAS DE 26 DE MARÇO DE 2026 A REITORA DO INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DE MATO GROSSO DO SUL (IFMS), no uso de suas atribuições legais, considerando o Decreto de 5 de dezembro de 2023, publicado no Diário Oficial da União de 06 de dezembro de 2023, seção 2, pág. 01, resolv
+
+---
+
+### 16. EXTRATO DE TERMO ADITIVO Nº 2/2026 - UASG 155849
+
+**Órgão:** Ministério da Educação/Instituto Federal de Educação, Ciência e Tecnologia de Mato Grosso do Sul/Campus Naviraí  
+**Data:** 27/03/2026 | **Seção 3** | **Página:** 77  
+**Link:** [Ver publicação completa no DOU](https://www.in.gov.br/en/web/dou/-/extrato-de-termo-aditivo-n-2/2026-uasg-155849-695965954)
+
+> EXTRATO DE TERMO ADITIVO Nº 2/2026 - UASG 155849 Número do Contrato: 3/2024. Nº Processo: 23347.003025/2024-25. Pregão. Nº 8/2023. Contratante: INST.FED.DO MS/CAMPUS NAVIRAI. Contratado: 14.147.098/0001-19 - SANCRISTO - COLETA DE RESIDUOS LTDA. Objeto: Prorrogar o prazo da vigência do contrato nº 03
+
+---
+
+### 17. EDITAL CAMPUS JARDIM/IFMS Nº 2.5/2026
+
+**Órgão:** Ministério da Educação/Instituto Federal de Educação, Ciência e Tecnologia de Mato Grosso do Sul  
+**Data:** 27/03/2026 | **Seção 3** | **Página:** 77  
+**Link:** [Ver publicação completa no DOU](https://www.in.gov.br/en/web/dou/-/edital-campus-jardim/ifms-n-2.5/2026-695920118)
+
+> EDITAL CAMPUS JARDIM/IFMS Nº 2.5/2026 PROCESSO SELETIVO SIMPLIFICADO PARA PROFESSOR SUBSTITUTO A DIRETORA-GERAL EM EXERCÍCIO DO CAMPUS JARDIM DO INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DE MATO GROSSO DO SUL (IFMS), no uso das atribuições legais que lhe confere o inciso XIV, art. 12 do Re
+
+---
+
+### 18. EXTRATO DE TERMO ADITIVO Nº 3/2026 - UASG 158132
+
+**Órgão:** Ministério da Educação/Instituto Federal de Educação, Ciência e Tecnologia de Mato Grosso do Sul  
+**Data:** 27/03/2026 | **Seção 3** | **Página:** 77  
+**Link:** [Ver publicação completa no DOU](https://www.in.gov.br/en/web/dou/-/extrato-de-termo-aditivo-n-3/2026-uasg-158132-695955318)
+
+> EXTRATO DE TERMO ADITIVO Nº 3/2026 - UASG 158132 Número do Contrato: 28/2023. Nº Processo: 23347.014686/2022-14. Pregão. Nº 32/2022. Contratante: INST.FED.DE EDUC.,CIENC.E TEC.DO MAT.G.DO SUL. Contratado: 41.939.100/0001-65 - SAMUEL RODRIGUES LOPES & CIA LTDA. Objeto: Prorrogar o prazo de vigência d
+
+---
+
+### 19. EDITAL CAMPUS CAMPO GRANDE/IFMS Nº 2.5/2026 PROCESSO SELETIVO SIMPLIFICADO PARA PROFESSOR SUBSTITUTO
+
+**Órgão:** Ministério da Educação/Instituto Federal de Educação, Ciência e Tecnologia de Mato Grosso do Sul/Campus Campo Grande  
+**Data:** 27/03/2026 | **Seção 3** | **Página:** 77  
+**Link:** [Ver publicação completa no DOU](https://www.in.gov.br/en/web/dou/-/edital-campus-campo-grande/ifms-n-2.5/2026-processo-seletivo-simplificado-para-professor-substituto-695918026)
+
+> EDITAL CAMPUS CAMPO GRANDE/IFMS Nº 2.5/2026 PROCESSO SELETIVO SIMPLIFICADO PARA PROFESSOR SUBSTITUTO O DIRETOR-GERAL DO CAMPUS CAMPO GRANDE DO INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DE MATO GROSSO DO SUL (IFMS), no uso das atribuições legais que lhe confere o inciso XIV, art. 12 do Regi
+
+---
+
+### 20. EXTRATO DE APOSTILAMENTO Nº 1/2026 - UASG 158132
+
+**Órgão:** Ministério da Educação/Instituto Federal de Educação, Ciência e Tecnologia de Mato Grosso do Sul  
+**Data:** 27/03/2026 | **Seção 3** | **Página:** 77  
+**Link:** [Ver publicação completa no DOU](https://www.in.gov.br/en/web/dou/-/extrato-de-apostilamento-n-1/2026-uasg-158132-695923406)
+
+> EXTRATO DE APOSTILAMENTO Nº 1/2026 - UASG 158132 Número do Contrato: 16/2025. Nº Processo: 23347.007464/2024-15. Contratante: INST.FED.DE EDUC.,CIENC.E TEC.DO MAT.G.DO SUL. Contratado: 03.508.097/0001-36 - REDE NACIONAL DE ENSINO E PESQUISA - RNP. Objeto: A concessão da reajuste sobre o valor contra
+
+---
+
+## Histórico
+
+**Relatórios Semanais**
+
+- [23/03/2026 → 27/03/2026](semanas/2026-03-23_2026-03-27.md)
+
+**Dias anteriores**
+
+- [27/03/2026](2026-03-27.md)
+- [26/03/2026](2026-03-26.md)
+- [25/03/2026](2026-03-25.md)
+- [24/03/2026](2026-03-24.md)
+- [23/03/2026](2026-03-23.md)
