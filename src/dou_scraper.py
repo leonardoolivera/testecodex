@@ -1,10 +1,11 @@
 """
 Scraper para Diário Oficial da União (DOU)
-Busca por publicações do Instituto Federal de Mato Grosso do Sul
+Busca publicações do IFMS via leiturajornal (endpoint oficial do in.gov.br)
 """
 
 import requests
-from datetime import datetime, date
+from bs4 import BeautifulSoup
+from datetime import datetime, date, timedelta
 import json
 import logging
 from typing import List, Dict, Optional
@@ -20,139 +21,156 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# Seções do DOU
+SECOES = ['do1', 'do2', 'do3']
+BASE_ARTICLE_URL = 'https://www.in.gov.br/en/web/dou/-/'
+LEITURAJORNAL_URL = 'https://www.in.gov.br/leiturajornal'
+
 
 class DOUScraper:
-    """
-    Classe para fazer scraping do Diário Oficial da União
-    """
-
     def __init__(self):
         self.session = requests.Session()
         self.session.headers.update({
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            'Accept-Language': 'pt-BR,pt;q=0.9',
         })
         self.results = []
 
-    def search_dou(self, keyword: str, pages: int = 5,
-                   start_date: Optional[date] = None,
-                   end_date: Optional[date] = None) -> List[Dict]:
+    def fetch_day(self, ref_date: date) -> List[Dict]:
         """
-        Busca no DOU por um termo específico, com filtro opcional de data.
-
-        Args:
-            keyword: Palavra-chave para buscar
-            pages: Número de páginas para buscar
-            start_date: Data inicial do filtro
-            end_date: Data final do filtro
-
-        Returns:
-            Lista de dicionários com os resultados
+        Busca todas as publicações de um dia específico em todas as seções.
         """
-        logger.info(f"Buscando: '{keyword}'" + (
-            f" | {start_date} → {end_date}" if start_date else ""
-        ))
-        all_results = []
+        all_items = []
+        data_str = ref_date.strftime('%d-%m-%Y')
 
-        for page in range(pages):
+        for secao in SECOES:
             try:
-                params = {
-                    'q': keyword,
-                    'p': page,
-                    'rows': 20,
-                    'sort': f"{SORT_BY} {ORDER}",
-                    'filtros': '',
-                }
+                logger.info(f"Buscando {data_str} | seção {secao}")
+                items = self._fetch_section(data_str, secao)
+                all_items.extend(items)
+                logger.info(f"  {len(items)} item(ns) em {secao}")
+            except Exception as e:
+                logger.warning(f"Erro em {secao} / {data_str}: {e}")
 
-                if start_date:
-                    params['startDate'] = start_date.strftime('%d-%m-%Y')
-                if end_date:
-                    params['endDate'] = end_date.strftime('%d-%m-%Y')
+        return all_items
 
-                response = self.session.get(DOU_API_URL, params=params, timeout=TIMEOUT)
-                response.raise_for_status()
-
-                data = response.json()
-
-                if 'docs' in data:
-                    for doc in data['docs']:
-                        result = self._parse_document(doc)
-                        if result:
-                            all_results.append(result)
-
-                if len(data.get('docs', [])) == 0:
-                    break
-
-            except requests.RequestException as e:
-                logger.error(f"Erro na página {page + 1}: {e}")
-                continue
-            except json.JSONDecodeError as e:
-                logger.error(f"Erro ao decodificar JSON: {e}")
-                continue
-
-        return all_results
-
-    def _parse_document(self, doc: Dict) -> Optional[Dict]:
+    def _fetch_section(self, data_str: str, secao: str) -> List[Dict]:
         """
-        Extrai informações relevantes de um documento
+        Busca o leiturajornal para uma data e seção específica.
+        Extrai o JSON embutido no <script id='params'>.
+        """
+        url = f"{LEITURAJORNAL_URL}?data={data_str}&secao={secao}"
+        response = self.session.get(url, timeout=TIMEOUT)
+        response.raise_for_status()
+
+        soup = BeautifulSoup(response.text, 'html.parser')
+        script_tag = soup.find('script', {'id': 'params'})
+
+        if not script_tag or not script_tag.string:
+            logger.debug(f"Sem dados para {secao} em {data_str}")
+            return []
+
+        data = json.loads(script_tag.string)
+        json_array = data.get('jsonArray', [])
+
+        items = []
+        for item in json_array:
+            parsed = self._parse_item(item, data_str, secao)
+            if parsed:
+                items.append(parsed)
+
+        return items
+
+    def _parse_item(self, item: dict, data_str: str, secao: str) -> Optional[Dict]:
+        """
+        Normaliza os campos de um item do jsonArray.
         """
         try:
-            titulo = doc.get('titulo', '').strip()
-            url = doc.get('url', '')
-
-            if not titulo or not url:
+            url_title = item.get('urlTitle', '')
+            if not url_title:
                 return None
 
-            return {
-                'data_publicacao': doc.get('data_publicacao', ''),
-                'titulo': titulo,
-                'secao': doc.get('secao', '').strip(),
-                'pagina': str(doc.get('pagina', '')).strip(),
-                'url': url,
-                'orgao': doc.get('orgao', '').strip(),
-                'resumo': (doc.get('ementa', '') or '')[:200].strip(),
-                'data_coleta': datetime.now().isoformat()
-            }
+            titulo = (
+                item.get('title') or
+                item.get('titulo') or
+                item.get('subtitulo') or
+                url_title
+            ).strip()
 
+            orgao = (
+                item.get('orgao') or
+                item.get('organizacao') or
+                item.get('hierarchyStr') or
+                ''
+            ).strip()
+
+            resumo = (
+                item.get('ementa') or
+                item.get('resumo') or
+                item.get('content') or
+                ''
+            )
+            if resumo:
+                resumo = resumo[:300].strip()
+
+            return {
+                'data_publicacao': data_str,
+                'titulo': titulo,
+                'secao': secao.upper(),
+                'pagina': str(item.get('pagina') or item.get('numberPage') or ''),
+                'url': BASE_ARTICLE_URL + url_title,
+                'orgao': orgao,
+                'resumo': resumo,
+                'data_coleta': datetime.now().isoformat(),
+            }
         except Exception as e:
-            logger.error(f"Erro ao fazer parsing do documento: {e}")
+            logger.error(f"Erro ao parsear item: {e}")
             return None
 
     def scrape_all_keywords(self, start_date: Optional[date] = None,
                             end_date: Optional[date] = None) -> List[Dict]:
         """
-        Realiza busca para todas as palavras-chave configuradas.
+        Busca publicações no intervalo de datas (padrão: hoje).
         """
-        all_results = []
+        if start_date is None:
+            start_date = date.today()
+        if end_date is None:
+            end_date = date.today()
 
-        for keyword in SEARCH_KEYWORDS:
-            results = self.search_dou(keyword, pages=5,
-                                      start_date=start_date, end_date=end_date)
-            all_results.extend(results)
-            logger.info(f"{len(results)} resultado(s) para '{keyword}'")
+        all_results = []
+        current = start_date
+
+        while current <= end_date:
+            # DOU só publica em dias úteis (seg-sex)
+            if current.weekday() < 5:
+                items = self.fetch_day(current)
+                all_results.extend(items)
+            current += timedelta(days=1)
 
         # Remove duplicatas por URL
-        unique_results = []
-        seen_urls = set()
-        for result in all_results:
-            if result['url'] not in seen_urls:
-                unique_results.append(result)
-                seen_urls.add(result['url'])
+        seen = set()
+        unique = []
+        for r in all_results:
+            if r['url'] not in seen:
+                unique.append(r)
+                seen.add(r['url'])
 
-        logger.info(f"Total único: {len(unique_results)}")
-        self.results = unique_results
-        return unique_results
+        logger.info(f"Total único no período: {len(unique)}")
+        self.results = unique
+        return unique
 
     def filter_by_content_keywords(self) -> List[Dict]:
         """
-        Filtra resultados que realmente mencionam IFMS no título, resumo ou órgão.
+        Filtra resultados que mencionam IFMS no título, resumo ou órgão.
         """
         keywords_lower = [k.lower() for k in SEARCH_KEYWORDS]
         filtered = [
             r for r in self.results
             if any(
-                kw in r['titulo'].lower() or
-                kw in r['resumo'].lower() or
-                kw in r['orgao'].lower()
+                kw in r.get('titulo', '').lower() or
+                kw in r.get('resumo', '').lower() or
+                kw in r.get('orgao', '').lower()
                 for kw in keywords_lower
             )
         ]
@@ -163,21 +181,15 @@ class DOUScraper:
 
     def filter_by_date_range(self, start_date: date, end_date: date) -> List[Dict]:
         """
-        Filtra resultados dentro de um intervalo de datas (fallback cliente).
-        Se a data não puder ser parseada, o item é mantido por segurança.
+        Filtro de data adicional (já garantido pelo scrape_all_keywords, mas mantido por segurança).
         """
         filtered = []
         for r in self.results:
-            pub = r.get('data_publicacao', '')
-            parsed = _parse_date(pub)
-            if parsed is None:
-                # Data não parseável — mantém para não perder publicações
-                logger.debug(f"Data não parseável '{pub}' — mantendo resultado: {r.get('titulo','')[:60]}")
-                filtered.append(r)
-            elif start_date <= parsed <= end_date:
+            parsed = _parse_date(r.get('data_publicacao', ''))
+            if parsed is None or start_date <= parsed <= end_date:
                 filtered.append(r)
 
-        logger.info(f"Após filtro de data ({start_date} → {end_date}): {len(filtered)}")
+        logger.info(f"Após filtro de data: {len(filtered)}")
         self.results = filtered
         return filtered
 
@@ -191,12 +203,11 @@ class DOUScraper:
 
 
 def _parse_date(value: str) -> Optional[date]:
-    """Tenta converter string de data para objeto date. Suporta vários formatos."""
+    """Tenta converter string de data para objeto date."""
     if not value:
         return None
-    # Normaliza: remove hora se vier junto (ex: "2026-03-26T00:00:00")
     value = str(value).strip()[:10]
-    for fmt in ('%d/%m/%Y', '%Y-%m-%d', '%d-%m-%Y', '%Y/%m/%d'):
+    for fmt in ('%d-%m-%Y', '%d/%m/%Y', '%Y-%m-%d', '%Y/%m/%d'):
         try:
             return datetime.strptime(value, fmt).date()
         except (ValueError, TypeError):
