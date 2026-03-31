@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  dou-scraper:
+    build: .
+    container_name: dou-scraper
+    volumes:
+      - ./credentials:/app/credentials:ro
+      - ./data:/app/data
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: python main.py
+    # Descomente para agendar execução diária às 6 da manhã
+    # restart: always
+    # See: https://crontab.guru/#0_6_*_*_*
